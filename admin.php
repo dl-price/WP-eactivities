@@ -33,14 +33,24 @@ function register_eactivities_options() {
         add_settings_section('icu-users', 'Users', null, 'icu-users');
 
         add_settings_field('allow_custom_usernames', 'Allow custom usernames', 'display_allow_custom_usernames', 'icu-users', 'icu-users');
+    add_settings_field('name_on_registration', 'Name on registration form', 'display_name_on_registration', 'icu-users', 'icu-users');
 
     register_setting('icu-users', 'allow_custom_usernames');
+    register_setting('icu-users', 'name_on_registration');
 }
 
 function display_allow_custom_usernames() {
     ?>
     <input type="checkbox" name="allow_custom_usernames" value="1" <?php checked(1, get_option('allow_custom_usernames'), true); ?> />
 <?php
+
+    function display_name_on_registration()
+    {
+        ?>
+        <input type="checkbox" name="name_on_registration"
+               value="1" <?php checked(1, get_option('name_on_registration'), true); ?> />
+        <?php
+    }
 
 }
 

@@ -37,10 +37,6 @@ function eactivities_override_registration_form() {
 
     $username = $xpath->query('//label[@for=\'user_login\']')->item(0)->parentNode;
 
-    if(!get_option('allow_custom_usernames')) {
-        $username->setAttribute('style', 'display:none;');
-    }
-
     $email = $xpath->query('//label[@for=\'user_email\']')->item(0)->parentNode;
 
     $shortcode = create_user_registration_element($dom, 'user_shortcode', 'Shortcode');
@@ -52,6 +48,14 @@ function eactivities_override_registration_form() {
 
     $lastname = create_user_registration_element($dom, 'last_name', 'Last Name');
     $form->insertBefore($lastname, $email);
+
+    if(!get_option('allow_custom_usernames')) {
+        $username->setAttribute('style', 'display:none;');
+    }
+    if(!get_option('name_on_registration')) {
+        $firstname->setAttribute('style', 'display:none;');
+        $lastname->setAttribute('style', 'display:none;');
+    }
 
     ob_get_clean();
     echo $dom->saveHTML();
