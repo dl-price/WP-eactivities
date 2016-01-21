@@ -7,7 +7,9 @@ add_action('admin_menu', 'eactivities_admin_menu');
 
 
 function eactivities_admin_menu() {
-    add_options_page('Eactivities options', 'Eactivities', 'manage_options', 'icu-eactivities', 'eactivities_options');
+    add_menu_page('General Settings', 'Eactivities', 'manage_options', 'icu-eactivities', 'eactivities_options');
+    add_submenu_page('icu-eactivities', 'Committee Members', 'Committee Members', 'manage_options', 'icu-committee');
+    //add_options_page('Eactivities options', 'Eactivities', 'manage_options', 'icu-eactivities', 'eactivities_options');
 }
 
 function eactivities_options() {

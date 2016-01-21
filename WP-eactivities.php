@@ -80,7 +80,7 @@ function eactivities_check_registration($errors, $sanitized_user_login, $sanitiz
     } else {
         $errors->remove(empty_username);
     }
-    
+
     return $errors;
 }
 
