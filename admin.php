@@ -14,6 +14,15 @@ function eactivities_options() {
     if ( !current_user_can( 'manage_options' ) )  {
         wp_die( __( 'You do not have sufficient permissions to access this page.' ) );
     }
-    echo '<p>Options should go here</p>';
+    ?>
+    <div class="wrap">
+    <h2>ICU Eactivities</h2>
+
+        <form method="post" action="options.php">
+
+            <?php submit_button(); ?>
+        </form>
+    </div>
+    <?php
 }
 
