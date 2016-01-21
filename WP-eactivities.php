@@ -7,3 +7,11 @@
  * Author URI: http://dlprice.co.uk
  * License: GPL2
  */
+
+require plugin_dir_path( __FILE__ ) . 'admin.php';
+
+add_filter('pre_option_users_can_register', 'eactivities_override_user_registration');
+
+function eactivities_override_user_registration($allow) {
+    return true;
+}
