@@ -35,6 +35,12 @@ function eactivities_override_registration_form() {
     $xpath = new DOMXPath($dom);
     $form = $xpath->query('//form')->item(0);
 
+    $username = $xpath->query('//label[@for=\'user_login\']')->item(0)->parentNode;
+
+    if(!get_option('allow_custom_usernames')) {
+        $username->setAttribute('style', 'display:none;');
+    }
+
     $email = $xpath->query('//label[@for=\'user_email\']')->item(0)->parentNode;
 
     $shortcode = create_user_registration_element($dom, 'user_shortcode', 'Shortcode');
