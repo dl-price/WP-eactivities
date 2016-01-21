@@ -69,3 +69,19 @@ function create_user_registration_element($dom, $input_id, $input_label) {
 
     return $e;
 }
+
+function eactivities_check_registration($errors, $sanitized_user_login, $sanitized_email) {
+    $shortcode = $_POST['user_shortcode'];
+
+    if(strlen(ldap_get_name($shortcode)) == 0) {
+
+        $errors->add('ERROR', 'Your shortcode appears to be less than correct', $shortcode);
+
+    } else {
+        $errors->remove(empty_username);
+    }
+    
+    return $errors;
+}
+
+add_filter('registration_errors', 'eactivities_check_registration', 10, 3);
