@@ -10,6 +10,14 @@
 
 require plugin_dir_path( __FILE__ ) . 'admin.php';
 
+$action = isset($_REQUEST['action']) ? $_REQUEST['action'] : 'login';
+
+// This action doesn't go into register_form because it makes it more complicated to add inputs prior to the pre-existing email input
+// without ruining the subsequent layout
+if ($action == 'register') {
+    add_action('login_footer', 'eactivities_override_registration_form');
+}
+
 add_filter('pre_option_users_can_register', 'eactivities_override_user_registration');
 
 // Currently allows user registration for any site in which this plugin is enabled. This will change.

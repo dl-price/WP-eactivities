@@ -2,12 +2,12 @@
 
 add_action('admin_menu', 'eactivities_admin_menu');
 
-// This action doesn't go into register_form because it makes it more complicated to add inputs prior to the pre-existing email input
-// without ruining the subsequent layout
-add_action('login_footer', 'eactivities_override_registration_form');
+
+    add_action('admin_init', 'register_eactivities_options');
+
 
 function eactivities_admin_menu() {
-    add_options_page('Eactivities options', 'Eactivities', 'manage_options', 'dlp-eactivities', 'eactivities_options');
+    add_options_page('Eactivities options', 'Eactivities', 'manage_options', 'icu-eactivities', 'eactivities_options');
 }
 
 function eactivities_options() {
@@ -20,9 +20,27 @@ function eactivities_options() {
 
         <form method="post" action="options.php">
 
-            <?php submit_button(); ?>
+            <?php
+            settings_fields('icu-users');
+            do_settings_sections('icu-users');
+            submit_button(); ?>
         </form>
     </div>
     <?php
+}
+
+function register_eactivities_options() {
+        add_settings_section('icu-users', 'Users', null, 'icu-users');
+
+        add_settings_field('allow_custom_usernames', 'Allow custom usernames', 'display_allow_custom_usernames', 'icu-users', 'icu-users');
+
+    register_setting('icu-users', 'allow_custom_usernames');
+}
+
+function display_allow_custom_usernames() {
+    ?>
+    <input type="checkbox" name="allow_custom_usernames" value="1" <?php checked(1, get_option('allow_custom_usernames'), true); ?> />
+<?php
+
 }
 
